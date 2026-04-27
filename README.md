@@ -43,27 +43,29 @@ A browser-based classic Minesweeper game built with React. Features a retro mili
 
 ```
 minesweeper/
-├── public/
-│   └── index.html
-├── src/
-│   ├── App.jsx                  # Root component — composes the full UI
-│   ├── constants.js             # Shared constants: difficulties, game states, colors
-│   ├── styles/
-│   │   └── index.css            # All global styles
-│   ├── utils/
-│   │   └── boardUtils.js        # Pure board logic functions
-│   ├── hooks/
-│   │   ├── useTimer.js          # Elapsed-time counter hook
-│   │   └── useGameState.js      # All game state and action handlers
-│   └── components/
-│       ├── Cell.jsx             # Single grid cell
-│       ├── Board.jsx            # Full mine grid
-│       ├── Header.jsx           # Title and system label
-│       ├── Controls.jsx         # Difficulty selector and New Game button
-│       ├── StatsBar.jsx         # Mines remaining, timer, and status message
-│       └── Footer.jsx           # Keyboard/mouse control hints
+├── index.html
+├── vite.config.js
 ├── package.json
-└── README.md
+├── .gitignore
+├── README.md
+└── src/
+    ├── main.jsx                 # App entry point
+    ├── App.jsx                  # Root component — composes the full UI
+    ├── constants.js             # Shared constants: difficulties, game states, colors
+    ├── styles/
+    │   └── index.css            # All global styles
+    ├── utils/
+    │   └── boardUtils.js        # Pure board logic functions
+    ├── hooks/
+    │   ├── useTimer.js          # Elapsed-time counter hook
+    │   └── useGameState.js      # All game state and action handlers
+    └── components/
+        ├── Cell.jsx             # Single grid cell
+        ├── Board.jsx            # Full mine grid
+        ├── Header.jsx           # Title and system label
+        ├── Controls.jsx         # Difficulty selector and New Game button
+        ├── StatsBar.jsx         # Mines remaining, timer, and status message
+        └── Footer.jsx           # Keyboard/mouse control hints
 ```
 
 ---
@@ -72,10 +74,12 @@ minesweeper/
 
 ### Prerequisites
 
+This project uses **Vite 8**, which requires Node.js 20.19+ or 22.12+.
+
 Make sure you have the following installed on your machine:
 
-- [Node.js](https://nodejs.org/) v18 or higher
-- [npm](https://www.npmjs.com/) v9 or higher (bundled with Node.js)
+- [Node.js](https://nodejs.org/) v20.19 or v22.12 or higher
+- [npm](https://www.npmjs.com/) v10 or higher (bundled with Node.js)
 
 To verify your versions:
 
@@ -93,20 +97,11 @@ git clone https://github.com/your-username/minesweeper.git
 cd minesweeper
 ```
 
-2. **Scaffold a Vite + React project** (if starting from scratch rather than cloning):
-
-```bash
-npm create vite@latest minesweeper -- --template react
-cd minesweeper
-```
-
-3. **Install dependencies:**
+2. **Install dependencies:**
 
 ```bash
 npm install
 ```
-
-4. **Copy the source files** into `src/` following the [Project Structure](#project-structure) above, replacing the Vite boilerplate files.
 
 ### Running Locally
 
@@ -131,6 +126,19 @@ The optimised output is written to the `dist/` directory. To preview the product
 ```bash
 npm run preview
 ```
+
+---
+
+## Tech Stack
+
+| Package | Version | Role |
+|---|---|---|
+| `react` | ^18.3.1 | UI library |
+| `react-dom` | ^18.3.1 | DOM renderer |
+| `vite` | ^8.0.10 | Build tool & dev server |
+| `@vitejs/plugin-react` | ^6.0.1 | React Fast Refresh via Oxc |
+
+> **Vite 8** ships with [Rolldown](https://rolldown.rs/) — a Rust-based unified bundler replacing the previous esbuild + Rollup dual-bundler setup. Builds are 10–30× faster than before. `@vitejs/plugin-react` v6 drops Babel as a dependency and uses Oxc for the React Refresh transform, reducing install size.
 
 ---
 
