@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 import { DIFFICULTIES, GAME_STATE } from "../constants";
 import {
   createBoard,
@@ -23,18 +23,24 @@ export function useGameState() {
   const [timerRunning, setTimerRunning] = useState(false);
   const [elapsed, resetTimer] = useTimer(timerRunning);
 
+  // Always holds the latest difficulty without causing stale closures.
+  const difficultyRef = useRef(difficulty);
+  difficultyRef.current = difficulty;
+
   const { rows, cols, mines } = DIFFICULTIES[difficulty];
 
   // ── Actions ─────────────────────────────────────────────────────────────────
 
-  const initGame = useCallback((diff = difficulty) => {
-    const d = DIFFICULTIES[diff];
+  const initGame = useCallback((diff) => {
+    // Fall back to the current difficulty via ref — never stale.
+    const key = diff ?? difficultyRef.current;
+    const d = DIFFICULTIES[key];
     setBoard(createBoard(d.rows, d.cols));
     setGameState(GAME_STATE.IDLE);
     setFlagCount(0);
     setTimerRunning(false);
     resetTimer();
-  }, [difficulty]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleDifficultyChange = useCallback((diff) => {
     setDifficulty(diff);
