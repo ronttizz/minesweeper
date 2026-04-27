@@ -1,0 +1,354 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap');
+
+/* ─── Reset ──────────────────────────────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ─── Body & CRT overlay ─────────────────────────────────────────────────────── */
+
+body {
+  background: #050a05;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Share Tech Mono', monospace;
+  overflow: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.12) 2px,
+    rgba(0, 0, 0, 0.12) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ─── App shell ──────────────────────────────────────────────────────────────── */
+
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding: 20px;
+  width: 100%;
+}
+
+/* ─── Header ─────────────────────────────────────────────────────────────────── */
+
+.header {
+  width: 100%;
+  max-width: 960px;
+  border: 1px solid #1a3a1a;
+  border-bottom: none;
+  padding: 14px 20px 10px;
+  background: #050a05;
+  position: relative;
+}
+
+.header::before {
+  content: 'SWP-7700 MINE DETECTION SYSTEM v2.4.1';
+  position: absolute;
+  top: -9px;
+  left: 16px;
+  font-size: 10px;
+  color: #1a5c1a;
+  background: #050a05;
+  padding: 0 6px;
+  letter-spacing: 1px;
+}
+
+.title {
+  font-family: 'VT323', monospace;
+  font-size: 42px;
+  color: #22c55e;
+  letter-spacing: 6px;
+  text-shadow: 0 0 20px rgba(34, 197, 94, 0.6), 0 0 40px rgba(34, 197, 94, 0.2);
+  line-height: 1;
+}
+
+.subtitle {
+  font-size: 10px;
+  color: #166534;
+  letter-spacing: 3px;
+  margin-top: 2px;
+}
+
+/* ─── Controls ───────────────────────────────────────────────────────────────── */
+
+.controls {
+  width: 100%;
+  max-width: 960px;
+  border: 1px solid #1a3a1a;
+  border-top: 1px solid #0d2a0d;
+  border-bottom: none;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  background: #060c06;
+}
+
+.diff-group {
+  display: flex;
+  gap: 6px;
+}
+
+.diff-btn {
+  background: transparent;
+  border: 1px solid #1a4a1a;
+  color: #4ade80;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.diff-btn:hover {
+  background: #0d2a0d;
+  border-color: #22c55e;
+}
+
+.diff-btn.active {
+  background: #14532d;
+  border-color: #22c55e;
+  color: #86efac;
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.3);
+}
+
+.reset-btn {
+  background: transparent;
+  border: 1px solid #4a1a1a;
+  color: #f87171;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  padding: 5px 14px;
+  cursor: pointer;
+  transition: all 0.1s;
+  margin-left: auto;
+}
+
+.reset-btn:hover {
+  background: #2a0d0d;
+  border-color: #ef4444;
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.3);
+}
+
+/* ─── Stats bar ──────────────────────────────────────────────────────────────── */
+
+.stats {
+  width: 100%;
+  max-width: 960px;
+  border: 1px solid #1a3a1a;
+  border-top: 1px solid #0a1a0a;
+  border-bottom: none;
+  padding: 8px 20px;
+  display: flex;
+  gap: 32px;
+  background: #050a05;
+  align-items: center;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.stat-label {
+  font-size: 9px;
+  color: #166534;
+  letter-spacing: 2px;
+}
+
+.stat-value {
+  font-family: 'VT323', monospace;
+  font-size: 26px;
+  color: #4ade80;
+  text-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
+  line-height: 1;
+}
+
+.stat-value.danger {
+  color: #f87171;
+  text-shadow: 0 0 10px rgba(248, 113, 113, 0.5);
+}
+
+.status-text {
+  margin-left: auto;
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: #16a34a;
+  animation: blink 1.4s step-end infinite;
+}
+
+.status-text.won {
+  color: #4ade80;
+  animation: none;
+  text-shadow: 0 0 12px rgba(74, 222, 128, 0.6);
+}
+
+.status-text.lost {
+  color: #f87171;
+  animation: none;
+  text-shadow: 0 0 12px rgba(248, 113, 113, 0.6);
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+/* ─── Board ──────────────────────────────────────────────────────────────────── */
+
+.board-wrapper {
+  width: 100%;
+  max-width: 960px;
+  border: 1px solid #1a3a1a;
+  background: #060c06;
+  padding: 16px;
+  overflow-x: auto;
+}
+
+.board-wrapper.won {
+  box-shadow: 0 0 24px rgba(74, 222, 128, 0.3), inset 0 0 24px rgba(74, 222, 128, 0.05);
+}
+
+.board-wrapper.lost {
+  box-shadow: 0 0 24px rgba(239, 68, 68, 0.3), inset 0 0 24px rgba(239, 68, 68, 0.05);
+}
+
+.board {
+  display: inline-grid;
+  gap: 2px;
+  padding: 2px;
+}
+
+/* ─── Cells ──────────────────────────────────────────────────────────────────── */
+
+.cell {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.05s, box-shadow 0.05s;
+  position: relative;
+  user-select: none;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.cell.hidden {
+  background: #0a1f0a;
+  border: 1px solid #1a4a1a;
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.5);
+}
+
+.cell.hidden:hover {
+  background: #0d2a0d;
+  border-color: #22c55e;
+  box-shadow: 0 0 6px rgba(34, 197, 94, 0.2);
+}
+
+.cell.revealed {
+  background: #030703;
+  border: 1px solid #0a1a0a;
+}
+
+.cell.flash {
+  background: #14532d;
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.4);
+}
+
+.cell.flagged {
+  background: #1c0a00;
+  border-color: #854d0e;
+}
+
+.flag-icon {
+  color: #fb923c;
+  font-size: 14px;
+  text-shadow: 0 0 8px rgba(251, 146, 60, 0.6);
+}
+
+.cell.mine {
+  background: #1a0505;
+  border-color: #7f1d1d;
+}
+
+.cell.mine.miss {
+  background: #0e0e0e;
+  border-color: #292524;
+}
+
+.mine-icon {
+  color: #ef4444;
+  font-size: 13px;
+  font-weight: 900;
+  text-shadow: 0 0 8px rgba(239, 68, 68, 0.7);
+}
+
+.mine-icon.dim {
+  color: #6b2828;
+  text-shadow: none;
+}
+
+.cell.wrong-flag {
+  background: #2a0808;
+  border-color: #991b1b;
+}
+
+.num {
+  font-family: 'VT323', monospace;
+  font-size: 18px;
+  line-height: 1;
+  text-shadow: 0 0 6px currentColor;
+}
+
+/* ─── Footer ─────────────────────────────────────────────────────────────────── */
+
+.footer {
+  width: 100%;
+  max-width: 960px;
+  border: 1px solid #1a3a1a;
+  border-top: 1px solid #0a1a0a;
+  padding: 8px 20px;
+  display: flex;
+  justify-content: space-between;
+  background: #050a05;
+}
+
+.footer-text {
+  font-size: 9px;
+  color: #1a4a1a;
+  letter-spacing: 1.5px;
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────────────────── */
+
+@media (max-width: 600px) {
+  .cell  { width: 24px; height: 24px; font-size: 11px; }
+  .num   { font-size: 15px; }
+  .title { font-size: 30px; }
+  .controls { gap: 12px; }
+}
