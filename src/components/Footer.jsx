@@ -7,7 +7,6 @@ export function Footer() {
       <div className="footer-text">
         LEFT CLICK: REVEAL  //  RIGHT CLICK: FLAG  //  DOUBLE CLICK: CHORD
       </div>
-      <div className="footer-text">SWP-7700 © CLEARANCE SYSTEMS INC.</div>
     </div>
   );
 }
