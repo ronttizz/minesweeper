@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useMemo } from "react";
 import { DIFFICULTIES, GAME_STATE } from "../constants";
 import {
   createBoard,
@@ -19,7 +19,6 @@ export function useGameState() {
     const { rows, cols } = DIFFICULTIES.BEGINNER;
     return createBoard(rows, cols);
   });
-  const [flagCount, setFlagCount] = useState(0);
   const [timerRunning, setTimerRunning] = useState(false);
   const [elapsed, resetTimer] = useTimer(timerRunning);
 
@@ -37,7 +36,6 @@ export function useGameState() {
     const d = DIFFICULTIES[key];
     setBoard(createBoard(d.rows, d.cols));
     setGameState(GAME_STATE.IDLE);
-    setFlagCount(0);
     setTimerRunning(false);
     resetTimer();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -47,7 +45,6 @@ export function useGameState() {
     const d = DIFFICULTIES[diff];
     setBoard(createBoard(d.rows, d.cols));
     setGameState(GAME_STATE.IDLE);
-    setFlagCount(0);
     setTimerRunning(false);
     resetTimer();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -89,10 +86,8 @@ export function useGameState() {
 
       if (cell.flagged) {
         cell.flagged = false;
-        setFlagCount(f => f - 1);
       } else {
         cell.flagged = true;
-        setFlagCount(f => f + 1);
       }
 
       return next;
@@ -144,6 +139,17 @@ export function useGameState() {
   }, [gameState, rows, cols]);
 
   // ── Derived values ───────────────────────────────────────────────────────────
+
+  // Derive flag count from board so the counter can't drift out-of-sync.
+  const flagCount = useMemo(() => {
+    let count = 0;
+    for (let r = 0; r < board.length; r++) {
+      for (let c = 0; c < board[r].length; c++) {
+        if (board[r][c].flagged) count++;
+      }
+    }
+    return count;
+  }, [board]);
 
   const minesLeft = mines - flagCount;
 
