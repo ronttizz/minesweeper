@@ -1,6 +1,7 @@
 # 💣 Minesweeper
 
 A browser-based classic Minesweeper game built with React. Features a retro military terminal aesthetic with CRT scanlines, phosphor green glow, and full gameplay mechanics including flood-fill reveal, flagging, and chording.
+Project is deployd as a static site to [Render.com](https://render.com). You can find the project in [https://minesweeper-h4pi.onrender.com/](https://minesweeper-h4pi.onrender.com/)
 
 ---
 
