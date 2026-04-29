@@ -214,7 +214,7 @@ Returned values:
 | `onReveal` | `(r, c) => void` | Reveal a cell; seeds mines on the very first call |
 | `onFlag` | `(r, c) => void` | Toggle a flag on an unrevealed cell |
 | `onChord` | `(r, c) => void` | Chord from a revealed numbered cell |
-| `onReset` | `(diff?) => void` | Reset the board, optionally switching difficulty |
+| `onReset` | `(diffKey?) => void` | Reset the board, optionally switching difficulty. The `NEW GAME` button calls this with no arguments. |
 | `onDifficultyChange` | `(diff) => void` | Switch difficulty and reset |
 
 ### Components
@@ -233,7 +233,7 @@ Renders the difficulty selector and New Game button.
 |---|---|---|
 | `difficulty` | `string` | Currently active difficulty key |
 | `onDifficultyChange` | `(diff) => void` | Called when a difficulty button is clicked |
-| `onReset` | `() => void` | Called when New Game is clicked |
+| `onReset` | `() => void` | Called when New Game is clicked (no args) |
 
 **`StatsBar`**
 
