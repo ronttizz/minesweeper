@@ -23,7 +23,12 @@ export function Controls({ difficulty, onDifficultyChange, onReset }) {
         ))}
       </div>
 
-      <button className="reset-btn" onClick={onReset}>
+      <button
+        className="reset-btn"
+        // Call reset without passing the click event as the "diff" arg.
+        // Passing the event breaks initGame's difficulty lookup.
+        onClick={() => onReset()}
+      >
         ↺ NEW GAME
       </button>
     </div>
